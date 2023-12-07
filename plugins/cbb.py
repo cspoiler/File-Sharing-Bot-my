@@ -15,7 +15,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup = InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(⚡🆓 Amazon Loot Deals 🆓⚡', url=f'https://t.me/+KI7bmZiUzUtkM2Jl')
+                        InlineKeyboardButton('⚡🆓 Amazon Loot Deals 🆓⚡', url=f'https://t.me/+KI7bmZiUzUtkM2Jl')
                     ],
                     [
                         InlineKeyboardButton("🔒 Close", callback_data = "close")
