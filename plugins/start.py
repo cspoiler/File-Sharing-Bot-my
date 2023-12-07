@@ -61,7 +61,8 @@ async def start_command(client: Client, message: Message):
         except:
             await message.reply_text("Something went wrong..!")
             return
-        await temp_msg.delete(60)
+        await temp_msg.delete()
+        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Updates channel", url=f'https://t.me/+KI7bmZiUzUtkM2Jl')]])
 
         for msg in messages:
 
@@ -85,7 +86,6 @@ async def start_command(client: Client, message: Message):
                 pass
         return
     else:
-        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Updates channel", url=f'https://t.me/+KI7bmZiUzUtkM2Jl')]])
         reply_markup = InlineKeyboardMarkup(
             [
                 [
@@ -96,7 +96,7 @@ async def start_command(client: Client, message: Message):
                 ],
                 [
                     InlineKeyboardButton("😊 About Me", callback_data = "about"),
-                    InlineKeyboardButton("🔒 Close", url=f'https://t.me/Bharat_Offers_Supportbot')
+                    InlineKeyboardButton("🛑 Support", url=f'https://t.me/Bharat_Offers_Supportbot')
                 ],
                 [
                     InlineKeyboardButton("🔒 Close", callback_data = "close")
