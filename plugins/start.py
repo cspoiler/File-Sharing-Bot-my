@@ -58,7 +58,6 @@ async def start_command(client: Client, message: Message):
         temp_msg = await message.reply("Please wait...")
         try:
             messages = await get_messages(client, ids)
-            messages.append(reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Updates channel", url=f'https://t.me/+KI7bmZiUzUtkM2Jl')]]))
         except:
             await message.reply_text("Something went wrong..!")
             return
@@ -116,7 +115,7 @@ async def start_command(client: Client, message: Message):
             quote = True
         )
         return
-
+messages.append('chi')
     
 #=====================================================================================##
 
