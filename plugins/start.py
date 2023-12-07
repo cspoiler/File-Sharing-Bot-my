@@ -58,12 +58,12 @@ async def start_command(client: Client, message: Message):
         temp_msg = await message.reply("Please wait...")
         try:
             messages = await get_messages(client, ids)
+            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Updates channel", url=f'https://t.me/+KI7bmZiUzUtkM2Jl')]])
         except:
             await message.reply_text("Something went wrong..!")
             return
         await temp_msg.delete()
-        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Updates channel", url=f'https://t.me/+KI7bmZiUzUtkM2Jl')]])
-
+        
         for msg in messages:
 
             if bool(CUSTOM_CAPTION) & bool(msg.document):
