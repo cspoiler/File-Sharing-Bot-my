@@ -85,6 +85,7 @@ async def start_command(client: Client, message: Message):
                 pass
         return
     else:
+        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Updates channel", url=f'https://t.me/+KI7bmZiUzUtkM2Jl')]])
         reply_markup = InlineKeyboardMarkup(
             [
                 [
