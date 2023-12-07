@@ -115,7 +115,7 @@ async def start_command(client: Client, message: Message):
             quote = True
         )
         return
-messages.append('chi')
+
     
 #=====================================================================================##
 
