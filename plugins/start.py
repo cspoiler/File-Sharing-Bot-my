@@ -61,7 +61,7 @@ async def start_command(client: Client, message: Message):
         except:
             await message.reply_text("Something went wrong..!")
             return
-        await temp_msg.delete()
+        await temp_msg.delete(60)
 
         for msg in messages:
 
