@@ -9,7 +9,7 @@ from pyrogram.enums import ParseMode
 import sys
 from datetime import datetime
 
-from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, FORCE_SUB_CHANNEL1, FORCE_SUB_CHANNEL2, CHANNEL_ID, PORT
+from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, FORCE_SUB_CHANNEL, CHANNEL_ID, PORT
 
 class Bot(Client):
     def __init__(self):
@@ -30,29 +30,16 @@ class Bot(Client):
         usr_bot_me = await self.get_me()
         self.uptime = datetime.now()
 
-        if FORCE_SUB_CHANNEL1:
+        if FORCE_SUB_CHANNEL:
             try:
-                link1 = (await self.create_chat_invite_link(FORCE_SUB_CHANNEL1, creates_join_request=True)).invite_link1
-                self.invitelink1 = link1
+                link = (await self.create_chat_invite_link(FORCE_SUB_CHANNEL, creates_join_request=True)).invite_link
+                self.invitelink = link
             except Exception as a:
                 self.LOGGER(__name__).warning(a)
-                self.LOGGER(__name__).warning("Bot can't Export Invite link from Force Sub Channel1!")
-                self.LOGGER(__name__).warning(f"Please Double check the FORCE_SUB_CHANNEL1 value and Make sure Bot is Admin in channel with Invite Users via Link Permission, Current Force Sub Channel Value: {FORCE_SUB_CHANNEL}")
+                self.LOGGER(__name__).warning("Bot can't Export Invite link from Force Sub Channel!")
+                self.LOGGER(__name__).warning(f"Please Double check the FORCE_SUB_CHANNEL value and Make sure Bot is Admin in channel with Invite Users via Link Permission, Current Force Sub Channel Value: {FORCE_SUB_CHANNEL}")
                 self.LOGGER(__name__).info("\nBot Stopped. Join https://t.me/CodeXBotzSupport for support")
                 sys.exit()
-
-        
-        if FORCE_SUB_CHANNEL2:
-            try:
-                link2 = (await self.create_chat_invite_link(FORCE_SUB_CHANNEL2, creates_join_request=True)).invite_link2
-                self.invitelink2 = link2
-            except Exception as a:
-                self.LOGGER(__name__).warning(a)
-                self.LOGGER(__name__).warning("Bot can't Export Invite link from Force Sub Channel2!")
-                self.LOGGER(__name__).warning(f"Please Double check the FORCE_SUB_CHANNEL2 value and Make sure Bot is Admin in channel with Invite Users via Link Permission, Current Force Sub Channel Value: {FORCE_SUB_CHANNEL}")
-                self.LOGGER(__name__).info("\nBot Stopped. Join https://t.me/CodeXBotzSupport for support")
-                sys.exit()
-                
         try:
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
