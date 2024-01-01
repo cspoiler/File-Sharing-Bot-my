@@ -32,8 +32,7 @@ class Bot(Client):
 
         if FORCE_SUB_CHANNEL:
             try:
-                if not link:
-                    await self.create_chat_invite_link(FORCE_SUB_CHANNEL, creates_join_request=True)
+                link = (await self.create_chat_invite_link(FORCE_SUB_CHANNEL, creates_join_request=True)).invite_link
                 self.invitelink = link
             except Exception as a:
                 self.LOGGER(__name__).warning(a)
