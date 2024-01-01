@@ -17,7 +17,6 @@ async def is_subscribed(filter, client, update):
         return True
     try:
         member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL, user_id = user_id)
-        approval = await client.approve_chat_join_request(chat_id = FORCE_SUB_CHANNEL, user_id = user_id)
     except UserNotParticipant:
         return False
 
