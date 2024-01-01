@@ -12,7 +12,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 
 from bot import Bot
 from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
-from helper_func import subscribed, encode, decode, get_messages
+from helper_func import subscribed1, subscribed2, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
 
@@ -130,14 +130,12 @@ REPLY_ERROR = """<code>Use this command as a replay to any telegram message with
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
     buttons = [
-        [InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 1 ⚡', url=f"https://t.me/+PTBUOr8UPrk4NmI1")
-        ],
-        [InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 2 ⚡', url=f"https://t.me/+raySqD7AFY43MGNl")
+        [InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 1 ⚡', url = client.invitelink1)
         ],
         [
             InlineKeyboardButton(
-                "⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 3 ⚡",
-                url = client.invitelink)
+                "⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 2 ⚡",
+                url = client.invitelink2)
         ]
     ]
     try:
