@@ -1,19 +1,32 @@
 #(©)Codexbotz
 
+import os
+import asyncio
 import base64
 import re
-import asyncio
-from pyrogram import filters
-from pyrogram.enums import ChatMemberStatus
-from config import FORCE_SUB_CHANNEL, ADMINS
+from pyrogram import Client, filters, __version__, raw
+from pyrogram.handlers import RawUpdateHandler
+from pyrogram.enums import ParseMode, ChatMemberStatus
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
-from pyrogram.errors import FloodWait
+
+from bot import Bot
+from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
+from database.database import add_user, del_user, full_userbase, present_user
+
+pending_requests = []
+
+def handle_pending_requests(client, update, users, chats):
+    global pending_requests
+    # This will be called when there are pending join requests
+    pending_requests = update.user_ids
 
 async def is_subscribed(filter, client, update):
     if not FORCE_SUB_CHANNEL:
         return True
     user_id = update.from_user.id
-    if user_id in ADMINS:
+    if user_id in ADMINS or user_id in pending_requests:
         return True
     try:
         member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL, user_id = user_id)
@@ -24,6 +37,15 @@ async def is_subscribed(filter, client, update):
         return False
     else:
         return True
+
+# ... rest of your code ...
+
+subscribed = filters.create(is_subscribed)
+
+app = Bot()  # Assuming Bot class initializes the Pyrogram Client with the correct parameters
+app.add_handler(RawUpdateHandler(handle_pending_requests, raw.types.UpdatePendingJoinRequests))
+app.run()
+
 
 async def encode(string):
     string_bytes = string.encode("ascii")
@@ -106,5 +128,3 @@ def get_readable_time(seconds: int) -> str:
     up_time += ":".join(time_list)
     return up_time
 
-
-subscribed = filters.create(is_subscribed)
