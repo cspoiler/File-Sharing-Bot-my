@@ -32,8 +32,8 @@ class Bot(Client):
 
         if FORCE_SUB_CHANNEL:
             try:
-                link = (await self.create_chat_invite_link(FORCE_SUB_CHANNEL, creates_join_request=True)).invite_link
-                self.invitelink = link
+                link = (await self.create_chat_invite_link(FORCE_SUB_CHANNEL, creates_join_request=True)).invite_link1
+                self.invitelink1 = link
             except Exception as a:
                 self.LOGGER(__name__).warning(a)
                 self.LOGGER(__name__).warning("Bot can't Export Invite link from Force Sub Channel!")
