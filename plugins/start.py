@@ -1,6 +1,5 @@
 import os
 import asyncio
-from datetime import datetime
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -53,6 +52,15 @@ async def start_command(client: Client, message: Message):
             except:
                 return
         temp_msg = await message.reply("Please wait...")
+
+        # Warning Message in English
+        warning_msg_en = await message.reply_text("⚠️ <b>Warning:</b> This message will be automatically deleted in 1 minute ⏳", parse_mode=ParseMode.HTML)
+        asyncio.create_task(delete_after_delay(warning_msg_en, 60))  # Schedule the deletion of the warning message after 1 minute
+
+        # Warning Message in Hindi
+        warning_msg_hi = await message.reply_text("⚠️ <b>चेतावनी:</b> यह संदेश स्वचालित रूप से 1 मिनट में हटा दिया जाएगा ⏳", parse_mode=ParseMode.HTML)
+        asyncio.create_task(delete_after_delay(warning_msg_hi, 60))  # Schedule the deletion of the warning message after 1 minute
+
         try:
             messages = await get_messages(client, ids)
         except:
@@ -79,10 +87,6 @@ async def start_command(client: Client, message: Message):
                 # Schedule the deletion of the new message after 1 minute
                 asyncio.create_task(delete_after_delay(new_msg, 60))  # 60 seconds = 1 minute
 
-                # Add countdown timer below the new message
-                timer_msg = await message.reply_text(f"⏳ <b>Time Left:</b> 60 seconds", parse_mode=ParseMode.HTML)
-                asyncio.create_task(update_timer(timer_msg, 60))  # Start the countdown timer
-
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
@@ -91,10 +95,6 @@ async def start_command(client: Client, message: Message):
 
                 # Schedule the deletion of the new message after 1 minute
                 asyncio.create_task(delete_after_delay(new_msg, 60))  # 60 seconds = 1 minute
-
-                # Add countdown timer below the new message
-                timer_msg = await message.reply_text(f"⏳ <b>Time Left:</b> 60 seconds", parse_mode=ParseMode.HTML)
-                asyncio.create_task(update_timer(timer_msg, 60))  # Start the countdown timer
             except:
                 pass
 
@@ -119,6 +119,7 @@ async def start_command(client: Client, message: Message):
                 ]
             ]
         )
+
         await message.reply_text(
             text=START_MSG.format(
                 first=message.from_user.first_name,
@@ -132,6 +133,7 @@ async def start_command(client: Client, message: Message):
             quote=True
         )
         return
+
 
 #=====================================================================================##
 
