@@ -1,5 +1,6 @@
 import os
 import asyncio
+from datetime import datetime
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -78,6 +79,10 @@ async def start_command(client: Client, message: Message):
                 # Schedule the deletion of the new message after 1 minute
                 asyncio.create_task(delete_after_delay(new_msg, 60))  # 60 seconds = 1 minute
 
+                # Add countdown timer below the new message
+                timer_msg = await message.reply_text(f"⏳ <b>Time Left:</b> 60 seconds", parse_mode=ParseMode.HTML)
+                asyncio.create_task(update_timer(timer_msg, 60))  # Start the countdown timer
+
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
@@ -86,6 +91,10 @@ async def start_command(client: Client, message: Message):
 
                 # Schedule the deletion of the new message after 1 minute
                 asyncio.create_task(delete_after_delay(new_msg, 60))  # 60 seconds = 1 minute
+
+                # Add countdown timer below the new message
+                timer_msg = await message.reply_text(f"⏳ <b>Time Left:</b> 60 seconds", parse_mode=ParseMode.HTML)
+                asyncio.create_task(update_timer(timer_msg, 60))  # Start the countdown timer
             except:
                 pass
 
@@ -131,6 +140,12 @@ WAIT_MSG = """"<b>Processing ...</b>"""
 REPLY_ERROR = """<code>Use this command as a replay to any telegram message with out any spaces.</code>"""
 
 #=====================================================================================##
+
+async def update_timer(timer_msg: Message, seconds: int):
+    while seconds > 0:
+        await asyncio.sleep(1)
+        seconds -= 1
+        await timer_msg.edit_text(f"⏳ <b>Time Left:</b> {seconds} seconds", parse_mode=ParseMode.HTML)
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
