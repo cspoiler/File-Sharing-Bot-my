@@ -47,7 +47,7 @@
     },
     "FORCE_SUB_MESSAGE": {
       "description": "Optional: Force Sub message of bot, use HTML parsemode format",
-      "value": "Hello {first}\n\n<b>You need to join in my all 3 Channel to use bot\n\n Click the 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel and then click 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧\n𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel क्लिक करें और फिर 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧 क्लिक करें\n\nKindly Please join all 3 Channel</b>"
+      "value": "Hello {first}\n\n<b>You need to join in my all 3 Channel to use bot\n\n Click the 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel and then click 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧\n𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel क्लिक करें और फिर 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧 क्लिक करें\n\n{mention} Kindly Please join all 3 Channel</b>"
     },
     "ADMINS": {
       "description": "A space separated list of user_ids of Admins, they can only create links",
