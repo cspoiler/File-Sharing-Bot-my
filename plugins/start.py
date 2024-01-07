@@ -149,7 +149,7 @@ async def update_timer(timer_msg: Message, seconds: int):
         seconds -= 1
         await timer_msg.edit_text(f"⏳ <b>Time Left:</b> {seconds} seconds", parse_mode=ParseMode.HTML)
 
-@Bot.on_message(filters.command('start') & filters.private)
+@Bot.on_message(filters.private & filters.command('start'))
 async def not_joined(client: Client, message: Message):
     buttons = [
         [InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 1 ⚡', url="https://t.me/+raySqD7AFY43MGNl")],
@@ -176,8 +176,12 @@ async def not_joined(client: Client, message: Message):
     except IndexError:
         pass
 
-    await message.reply(
-        text=FORCE_MSG.format(
+    video_url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+
+    # Send the video along with FORCE_MSG
+    await message.reply_video(
+        video=video_url,
+        caption=FORCE_MSG.format(
             first=message.from_user.first_name,
             last=message.from_user.last_name,
             username=None if not message.from_user.username else '@' + message.from_user.username,
