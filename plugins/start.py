@@ -54,11 +54,11 @@ async def start_command(client: Client, message: Message):
         temp_msg = await message.reply("Please wait...")
 
         # Warning Message in English
-        warning_msg_en = await message.reply_text("⚠️ <b>Warning:</b> This message will be automatically deleted in 1 minute ⏳", parse_mode=ParseMode.HTML)
+        warning_msg_en = await message.reply_text("⚠️ <b>Warning:</b> This message will be automatically deleted in 1 minute, So Fowdard this to Save Message⏳", parse_mode=ParseMode.HTML)
         asyncio.create_task(delete_after_delay(warning_msg_en, 60))  # Schedule the deletion of the warning message after 1 minute
 
         # Warning Message in Hindi
-        warning_msg_hi = await message.reply_text("⚠️ <b>चेतावनी:</b> यह संदेश स्वचालित रूप से 1 मिनट में हटा दिया जाएगा ⏳", parse_mode=ParseMode.HTML)
+        warning_msg_hi = await message.reply_text("⚠️ <b>चेतावनी:</b> यह संदेश स्वचालित रूप से 1 मिनट में हटा दिया जाएगा, So Fowdard this to Save Message⏳", parse_mode=ParseMode.HTML)
         asyncio.create_task(delete_after_delay(warning_msg_hi, 60))  # Schedule the deletion of the warning message after 1 minute
 
         try:
@@ -153,9 +153,15 @@ async def update_timer(timer_msg: Message, seconds: int):
 async def not_joined(client: Client, message: Message):
     buttons = [
         [
+            InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n channel 1  ⚡', url=f"https://t.me/+raySqD7AFY43MGNl")
+        ],
+        [
+            InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n channel 2 ⚡', url = client.invitelink)
+        ],
+        [
             InlineKeyboardButton(
-                "Join Channel",
-                url = client.invitelink)
+                "⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n channel 3 ",
+                url=f"https://t.me/+KI7bmZiUzUtkM2Jl")
         ]
     ]
     try:
