@@ -149,49 +149,38 @@ async def update_timer(timer_msg: Message, seconds: int):
         seconds -= 1
         await timer_msg.edit_text(f"⏳ <b>Time Left:</b> {seconds} seconds", parse_mode=ParseMode.HTML)
 
-@Bot.on_message(filters.private & filters.command('start'))
+@Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
     buttons = [
-        [InlineKeyboardButton('⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 1 ⚡', url="https://t.me/+raySqD7AFY43MGNl")],
         [
             InlineKeyboardButton(
-                "⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 2 ⚡",
-                url="https://t.me/+PTBUOr8UPrk4NmI1")
-        ],
-        [
-            InlineKeyboardButton(
-                "⚡ 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢𝐧 3 ⚡",
-                url=client.invitelink)
+                "Join Channel",
+                url = client.invitelink)
         ]
     ]
     try:
         buttons.append(
             [
                 InlineKeyboardButton(
-                    text='𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧',
-                    url=f"https://t.me/{client.username}?start={message.command[1]}"
+                    text = 'Try Again',
+                    url = f"https://t.me/{client.username}?start={message.command[1]}"
                 )
             ]
         )
     except IndexError:
         pass
 
-    video_link = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-
-    # Send video along with FORCE_MSG
-    video_msg = await client.send_video(
-        chat_id=message.from_user.id,
-        video=video_link,
-        caption=FORCE_MSG.format(
-            first=message.from_user.first_name,
-            last=message.from_user.last_name,
-            username=None if not message.from_user.username else '@' + message.from_user.username,
-            mention=message.from_user.mention,
-            id=message.from_user.id
-        ),
-        parse_mode=ParseMode.HTML,
-        reply_to_message_id=message.message_id,
-        disable_notification=True
+    await message.reply(
+        text = FORCE_MSG.format(
+                first = message.from_user.first_name,
+                last = message.from_user.last_name,
+                username = None if not message.from_user.username else '@' + message.from_user.username,
+                mention = message.from_user.mention,
+                id = message.from_user.id
+            ),
+        reply_markup = InlineKeyboardMarkup(buttons),
+        quote = True,
+        disable_web_page_preview = True
     )
 
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
