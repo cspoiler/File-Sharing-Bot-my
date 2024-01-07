@@ -49,8 +49,7 @@ except ValueError:
         raise Exception("Your Admins list does not contain valid integers.")
 
 #Force sub message 
-FORCE_MSG = os.environ.get("FORCE_SUB_MESSAGE", "Hello {first}\n\n<b>You need to join in my all 3 Channel to use bot\n\n Click the 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel and then click 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧
-𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel क्लिक करें और फिर 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧 क्लिक करें\n\nKindly Please join all 3 Channel</b>")
+FORCE_MSG = os.environ.get("FORCE_SUB_MESSAGE", "Hello {first}\n\n<b>You need to join in my all 3 Channel to use bot\n\n Click the 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel and then click 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧\n𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐣𝐨𝐢n all 3 channel क्लिक करें और फिर 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧 क्लिक करें\n\nKindly Please join all 3 Channel</b>")
 
 #set your Custom Caption here, Keep None for Disable Custom Caption
 CUSTOM_CAPTION = os.environ.get("CUSTOM_CAPTION", None)
