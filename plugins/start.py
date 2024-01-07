@@ -176,11 +176,12 @@ async def not_joined(client: Client, message: Message):
     except IndexError:
         pass
 
-    video_url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    video_link = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
 
-    # Send the video along with FORCE_MSG
-    await message.reply_video(
-        video=video_url,
+    # Send video along with FORCE_MSG
+    video_msg = await client.send_video(
+        chat_id=message.from_user.id,
+        video=video_link,
         caption=FORCE_MSG.format(
             first=message.from_user.first_name,
             last=message.from_user.last_name,
@@ -188,9 +189,9 @@ async def not_joined(client: Client, message: Message):
             mention=message.from_user.mention,
             id=message.from_user.id
         ),
-        reply_markup=InlineKeyboardMarkup(buttons),
-        quote=True,
-        disable_web_page_preview=True
+        parse_mode=ParseMode.HTML,
+        reply_to_message_id=message.message_id,
+        disable_notification=True
     )
 
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
